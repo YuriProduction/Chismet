@@ -1,6 +1,10 @@
 import math
 
+# погрешность
 EPSILON = 0.5 * 10 ** (-5)
+
+# минимальное значение производной
+min_derivative = 4.599
 
 
 # значения второй производной
@@ -45,7 +49,7 @@ def Newton_method(x):
 
     x_next = x - function_value(x) / derivative_function_value(x)
     count_Newton += 1
-    if abs(x - x_next) < EPSILON:
+    if abs(function_value(x_next)) / min_derivative < EPSILON:
         return x_next
     return Newton_method(x_next)
 
@@ -57,7 +61,7 @@ def modyfied_Newton_method(x):
     global count_Newton_modify
     x_next = x - function_value(x) / derivative_function_value(0.3)
     count_Newton_modify += 1
-    if abs(x - x_next) < EPSILON:
+    if abs(function_value(x_next)) / min_derivative < EPSILON:
         return x_next
     return modyfied_Newton_method(x_next)
 
@@ -69,7 +73,7 @@ def nepod_hord_method(x):
     global count_nep_hord
     x_next = x - (function_value(x) * (x - 0.3)) / (function_value(x) - function_value(0.3))
     count_nep_hord += 1
-    if abs(function_value(x_next)) / 4.599 < EPSILON:
+    if abs(function_value(x_next)) / min_derivative < EPSILON:
         return x_next
     return nepod_hord_method(x_next)
 
@@ -81,7 +85,7 @@ def pod_hord_method(x, x_pred):
     global count_pod_hord
     x_next = x - (function_value(x) * (x - x_pred)) / (function_value(x) - function_value(x_pred))
     count_pod_hord += 1
-    if abs(x - x_next) < EPSILON:
+    if abs(function_value(x_next)) / min_derivative < EPSILON:
         return x_next
     return pod_hord_method(x_next, x)
 
@@ -89,13 +93,13 @@ def pod_hord_method(x, x_pred):
 count_simple_iteration = 0
 
 
-def simple_iteration_method(x):
+def simple_iteration_method(x, q, x_0, x_1):
     global count_simple_iteration
     x_next = math.cos(x) / 4.4
     count_simple_iteration += 1
-    if abs(x_next - x) < EPSILON:
+    if q ** count_simple_iteration <= EPSILON * abs(x_0 - x_1) * (1 - q):
         return x_next
-    return simple_iteration_method(x_next)
+    return simple_iteration_method(x_next, q, x_0, x_1)
 
 
 print('Метод дихотомии')
@@ -114,5 +118,5 @@ print('Метод подвижных хорд')
 print(pod_hord_method(0.3, 0.2))
 print(count_pod_hord)
 print('Метод простой итерации')
-print(simple_iteration_method(0.1 / 2))
+print(simple_iteration_method(0.1 / 2, 0.05484, 0.25, math.cos(0.25) / 4.4))
 print(count_simple_iteration)
