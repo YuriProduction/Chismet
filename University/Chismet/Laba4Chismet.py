@@ -4,9 +4,12 @@ from sympy import diff
 
 def main():
 	h_i = [0.1, 0.05, 0.025]
+	print("Левые прямоугольники")
 	left_rectangles(h_i, 0, 2)
-	print()
+	print("Гаусс")
 	euler(h_i, 0, 2)
+	print("Эйлер")
+	print(0.548 * func(0.225) + 0.902 * func(1) + 0.548 * func(1.7746))
 
 
 def func(x):
