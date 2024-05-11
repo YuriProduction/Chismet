@@ -10,6 +10,7 @@ def main():
 	euler(h_i, 0, 2)
 	print("Эйлер")
 	print(0.548 * func(0.225) + 0.902 * func(1) + 0.548 * func(1.7746))
+	print(derivative(derivative(derivative(derivative(derivative(derivative(1)))))))
 
 
 def func(x):
