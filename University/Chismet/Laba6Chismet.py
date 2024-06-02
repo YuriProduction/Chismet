@@ -49,7 +49,7 @@ def Lambda(lambda_i, h):
 
 
 def Mu(mu, lambda_i, i, h):
-	return (mu - h ** 2 * (3.9 * h * i * (1 - h * i) + 9.8)) / (2 + h ** 2 - lambda_i)
+	return (mu - h ** 2 * (3 * h * i * (1 - h * i) + 8)) / (2 + h ** 2 - lambda_i)
 
 
 def Progonka(h, N):
