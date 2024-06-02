@@ -84,8 +84,7 @@ def find_start_mu(start=-5):
 
 
 if __name__ == "__main__":
-	Nums = [10, 20]
-	for N in Nums:
+	for N in [10, 20]:
 		h = (RIGHT - LEFT) / N
 		x = np.linspace(LEFT, RIGHT, num=N + 1)
 		analytic_solutions = analytic_solution(x)
